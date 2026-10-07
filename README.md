@@ -11,8 +11,8 @@ Simula el acceso a un sistema escolar. El usuario inicia sesión en `login.html`
 
 ## Enlaces
 
-- **Repositorio:** _(pegar aquí el link de GitHub)_
-- **GitHub Pages:** _(pegar aquí el link en vivo)_
+- **Repositorio:** https://github.com/FranciscoEliasBC/Actividad5
+- **GitHub Pages:** https://franciscoeliasbc.github.io/Actividad5/
 
 ## Estructura del repositorio
 
@@ -187,28 +187,21 @@ Las principales funciones utilizadas son:
 5. `calcularEdad()` Calcula la edad del alumno a partir de su fecha de nacimiento.
 
 6. `esMayorDeEdad()` Determina si el alumno es mayor o menor de edad.
-
 ## Proceso de creación
 
-1. **Creación del login:** Primero se creó login.html con un formulario que contiene los campos de correo electrónico y contraseña.
-Se agregó un botón para iniciar sesión y elementos destinados a mostrar mensajes de error y mensajes de éxito.
-Posteriormente, mediante login.css, se diseñó una tarjeta centrada con fondo, bordes redondeados, sombras y colores personalizados.
+1. **Creación del login:** Primero se creó login.html con un formulario que contiene los campos de correo electrónico y contraseña. Se agregó un botón para iniciar sesión y elementos destinados a mostrar mensajes de error y mensajes de éxito. Posteriormente, mediante login.css, se diseñó una tarjeta centrada con fondo, bordes redondeados, sombras y colores personalizados.
 
-![image alt](img\Creaciondellogin.png)
+![Creación del login](img/Creaciondellogin.png)
 
-2. **Validación del login:** Después se conectó el formulario con login.js.
-Al presionar `Iniciar sesión`, se ejecutan `validarCorreo()` y `validarPassword()`.
-Si los datos son incorrectos, aparecen mensajes debajo de los campos correspondientes.
+2. **Validación del login:** Después se conectó el formulario con login.js. Al presionar `Iniciar sesión`, se ejecutan `validarCorreo()` y `validarPassword()`. Si los datos son incorrectos, aparecen mensajes debajo de los campos correspondientes.
 
-![image alt](img\Validaciondellogin.png)
+![Validación del login](img/Validaciondellogin.png)
 
 Si los datos son correctos, se almacena el correo en sessionStorage y el sistema cambia hacia `index.html`.
 
-![image alt](img\Validaciondellogin2.png)
+![Validación del login 2](img/Validaciondellogin2.png)
 
-
-3. **Creación del navbar:** Después del login se creó el navbar principal del sistema.
-El navbar contiene:
+3. **Creación del navbar:** Después del login se creó el navbar principal del sistema. El navbar contiene:
 
 - Botón hamburguesa.
 - Nombre "Sistema Escolar".
@@ -219,24 +212,20 @@ El navbar contiene:
 
 El correo mostrado en esta sección proviene de sessionStorage.
 
-![image alt](img\Creaciondelnavbar.png)
+![Creación del navbar](img/Creaciondelnavbar.png)
 
-4. **Creación del sidebar:** Se creó un menú lateral utilizando HTML, Bootstrap y CSS personalizado.
-El sidebar contiene las opciones:
+4. **Creación del sidebar:** Se creó un menú lateral utilizando HTML, Bootstrap y CSS personalizado. El sidebar contiene las opciones:
 
 - Inicio.
 - Usuarios.
 - Captura.
 - Alumnos.
 
-La opción Usuarios utiliza el componente collapse de Bootstrap para mostrar el submenú Captura.
-También se agregó un botón hamburguesa para mostrar u ocultar el sidebar.
+La opción Usuarios utiliza el componente collapse de Bootstrap para mostrar el submenú Captura. También se agregó un botón hamburguesa para mostrar u ocultar el sidebar.
 
-![image alt](img\Creaciondelsidebar.png)
+![Creación del sidebar](img/Creaciondelsidebar.png)
 
-5. **Creación de la captura de usuarios:** Posteriormente se agregó la vista Usuarios → Captura.
-
-Esta sección contiene un formulario con:
+5. **Creación de la captura de usuarios:** Posteriormente se agregó la vista Usuarios → Captura. Esta sección contiene un formulario con:
 
 - Nombre de usuario.
 - Correo electrónico.
@@ -245,10 +234,9 @@ Esta sección contiene un formulario con:
 
 Después de validar los datos, el usuario se agrega a una lista que aparece debajo del formulario.
 
-![image alt](img\Creaciondelacapturadeusuarios.png)
+![Creación de la captura de usuarios](img/Creaciondelacapturadeusuarios.png)
 
-6. **Creación de la sección de alumnos:** Se creó una segunda vista llamada Alumnos → Registro.
-El formulario contiene:
+6. **Creación de la sección de alumnos:** Se creó una segunda vista llamada Alumnos → Registro. El formulario contiene:
 
 - Nombre completo.
 - Número de control.
@@ -257,12 +245,9 @@ El formulario contiene:
 
 El número de control debe tener exactamente seis dígitos.
 
-![image alt](img\Creaciondelasecciondealumnos.png)
+![Creación de la sección de alumnos](img/Creaciondelasecciondealumnos.png)
 
-7. **Creación del modal** Una vez que los datos del alumno pasan las validaciones, se calculan la edad y la mayoría de edad.
-Los resultados se muestran mediante un modal de Bootstrap.
-
-El modal presenta:
+7. **Creación del modal:** Una vez que los datos del alumno pasan las validaciones, se calculan la edad y la mayoría de edad. Los resultados se muestran mediante un modal de Bootstrap. El modal presenta:
 
 - Nombre del alumno.
 - Número de control.
@@ -270,37 +255,36 @@ El modal presenta:
 - Resultado de mayoría de edad.
 - Botón "Cerrar".
 
-![image alt](img\Creaciondelmodal.png)
+![Creación del modal](img/Creaciondelmodal.png)
 
-8. **Implementación del cierre de sesión:** Finalmente se agregó la opción "Salir del sistema" en el menú del usuario.
-Al seleccionarla, se elimina correoUsuario de sessionStorage y el sistema regresa automáticamente a login.html.
+8. **Implementación del cierre de sesión:** Finalmente se agregó la opción "Salir del sistema" en el menú del usuario. Al seleccionarla, se elimina correoUsuario de sessionStorage y el sistema regresa automáticamente a login.html.
 
-![image alt](img\Implementaciondelcierredesesion.png)
+![Implementación del cierre de sesión](img/Implementaciondelcierredesesion.png)
 
 ## Flujo completo
 
 1 — Pantalla de login
 
-![image alt](img\flujo1.png)
+![Pantalla de login](img/flujo1.png)
 
 2 — Panel principal
 
-![image alt](img\flujo2.png)
+![Panel principal](img/flujo2.png)
 
 3 — Captura de usuarios
 
-![image alt](img\flujo3.png)
+![Captura de usuarios](img/flujo3.png)
 
-![image alt](img\flujo3.1.png)
+![Lista de usuarios capturados](img/flujo3.1.png)
 
 4 — Registro de alumno
 
-![image alt](img\flujo4.png)
+![Registro de alumno](img/flujo4.png)
 
 5 — Modal de edad
 
-![image alt](img\flujo5.png)
+![Modal de edad](img/flujo5.png)
 
 6 — Cierre de sesión
 
-![image alt](img\flujo6.png)
+![Cierre de sesión](img/flujo6.png)
