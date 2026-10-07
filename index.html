@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema | Panel</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="pagina-sistema">
+
+    <nav class="navbar navbar-expand navbar-dark navbar-custom fixed-top px-3">
+        <button class="btn btn-outline-light border-0 me-2" id="btn-hamburguesa" aria-label="Abrir/cerrar menú">
+            <i class="bi bi-list fs-4"></i>
+        </button>
+        <span class="navbar-brand fw-bold fs-6 mb-0">Sistema Escolar</span>
+
+        <div class="dropdown ms-auto">
+            <button class="btn btn-outline-light border-0 dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" id="btn-usuario-navbar">
+                <i class="bi bi-person-circle fs-5"></i>
+                <span id="nombre-usuario-navbar" class="fw-medium">Usuario</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
+                <li><button class="dropdown-item text-danger fw-medium" id="btn-salir"><i class="bi bi-box-arrow-right me-2"></i>Salir del sistema</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link enlace-vista activo" href="#" data-vista="vista-inicio">
+                    <i class="bi bi-house-door me-2"></i>Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-usuarios">
+                    <span><i class="bi bi-people me-2"></i>Usuarios</span>
+                    <i class="bi bi-chevron-down opacity-50 small"></i>
+                </a>
+                <div class="collapse" id="submenu-usuarios">
+                    <ul class="nav flex-column ms-2 mt-1">
+                        <li class="nav-item">
+                            <a class="nav-link enlace-vista" href="#" data-vista="vista-captura">
+                                <i class="bi bi-person-plus me-2"></i>Captura
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link enlace-vista" href="#" data-vista="vista-alumnos">
+                    <i class="bi bi-mortarboard me-2"></i>Alumnos
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <main class="contenido" id="contenido">
+
+        <section id="vista-inicio" class="vista">
+            <div class="card card-custom p-4">
+                <h2 class="h4 fw-bold mb-2">Bienvenido</h2>
+                <p class="text-muted mb-0">Has iniciado sesión correctamente. Usa el menú lateral para capturar usuarios o registrar alumnos.</p>
+            </div>
+        </section>
+
+        <section id="vista-captura" class="vista d-none">
+            <h2 class="h4 fw-bold mb-4">Usuarios &raquo; Captura</h2>
+            <div class="card card-custom p-4 mb-4" style="max-width:520px;">
+                <form id="formulario-captura" novalidate>
+                    <div class="mb-3">
+                        <label for="captura-nombre" class="form-label">Nombre de usuario</label>
+                        <input type="text" id="captura-nombre" class="form-control" placeholder="Ej: jperez">
+                        <span id="error-captura-nombre" class="mensaje-error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="captura-correo" class="form-label">Correo electrónico</label>
+                        <input type="text" id="captura-correo" class="form-control" placeholder="correo@ejemplo.com">
+                        <span id="error-captura-correo" class="mensaje-error"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="captura-password" class="form-label">Contraseña</label>
+                        <input type="password" id="captura-password" class="form-control" placeholder="Mín. 8 caracteres, con mayúscula, número y símbolo">
+                        <span id="error-captura-password" class="mensaje-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar usuario</button>
+                    <p id="mensaje-captura-exito" class="mensaje-exito mt-3"></p>
+                </form>
+            </div>
+
+            <h3 class="h6 fw-bold mb-3 text-secondary">Usuarios capturados en esta sesión</h3>
+            <ul id="lista-usuarios-capturados" class="list-group border-0 shadow-sm" style="max-width:520px;">
+                <li class="list-group-item text-muted border-0 bg-white">Aún no has capturado ningún usuario.</li>
+            </ul>
+        </section>
+
+        <section id="vista-alumnos" class="vista d-none">
+            <h2 class="h4 fw-bold mb-4">Alumnos &raquo; Registro</h2>
+            <div class="card card-custom p-4" style="max-width:520px;">
+                <form id="formulario-alumno" novalidate>
+                    <div class="mb-3">
+                        <label for="alumno-nombre" class="form-label">Nombre completo</label>
+                        <input type="text" id="alumno-nombre" class="form-control" placeholder="Ej: María José Pérez">
+                        <span id="error-alumno-nombre" class="mensaje-error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="alumno-control" class="form-label">Número de control (6 dígitos)</label>
+                        <input type="text" id="alumno-control" class="form-control" placeholder="Ej: 231151" maxlength="6">
+                        <span id="error-alumno-control" class="mensaje-error"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="alumno-fecha" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" id="alumno-fecha" class="form-control">
+                        <span id="error-alumno-fecha" class="mensaje-error"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verificar edad</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="modal fade" id="modal-edad" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Resultado del alumno</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <p class="mb-1 fs-5"><strong id="modal-alumno-nombre"></strong></p>
+                    <p class="text-muted mb-3">Número de control: <span id="modal-alumno-control"></span></p>
+                    <div class="display-5 fw-bold text-primary mb-2" id="modal-alumno-edad">-- años</div>
+                    <p id="modal-alumno-mayor" class="mb-0 fw-medium"></p>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utileria.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
