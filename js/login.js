@@ -85,6 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
         });
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a8dd5504c198e182c2ac973db56202b307821683
     const sidebar = document.getElementById('sidebar');
 
     if (sidebar) {
