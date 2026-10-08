@@ -1,8 +1,21 @@
+
+const CLAVE_USUARIOS = 'usuariosRegistrados';
+
+function obtenerUsuarios() {
+    try {
+        const guardados = JSON.parse(localStorage.getItem(CLAVE_USUARIOS));
+        return Array.isArray(guardados) ? guardados : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function guardarUsuarios(usuarios) {
+    localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(usuarios));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ===================================================
-       LOGIN.HTML
-    =================================================== */
     const formularioLogin = document.getElementById('formulario-login');
 
     if (formularioLogin) {
@@ -11,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const errorCorreo = document.getElementById('error-correo');
         const errorPassword = document.getElementById('error-password');
         const mensajeExito = document.getElementById('mensaje-exito');
+        const avisoLogin = document.getElementById('aviso-login');
+
+        avisoLogin.textContent = obtenerUsuarios().length === 0
+            ? 'Aún no hay usuarios registrados: el primer acceso es libre. Registra usuarios en Usuarios > Captura.'
+            : 'Solo pueden entrar los usuarios registrados.';
 
         formularioLogin.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -44,6 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const usuarios = obtenerUsuarios();
+
+            if (usuarios.length > 0) {
+                const usuarioEncontrado = usuarios.find(u =>
+                    u.correo.toLowerCase() === correo.toLowerCase() && u.password === password
+                );
+
+                console.log('usuario registrado encontrado:', !!usuarioEncontrado);
+
+                if (!usuarioEncontrado) {
+                    errorPassword.textContent = 'Correo o contraseña incorrectos. Solo pueden entrar usuarios registrados.';
+                    return;
+                }
+            }
+
             sessionStorage.setItem('correoUsuario', correo);
             mensajeExito.textContent = 'Acceso correcto. Entrando al sistema...';
 
@@ -52,15 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
         });
     }
-
-    /* ===================================================
-       INDEX.HTML
-    =================================================== */
     const sidebar = document.getElementById('sidebar');
 
     if (sidebar) {
 
-        // Si no hay sesión activa, regresa al login
         const correoUsuario = sessionStorage.getItem('correoUsuario');
         if (!correoUsuario) {
             window.location.href = 'login.html';
@@ -69,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('nombre-usuario-navbar').textContent = correoUsuario;
 
-        // --- Botón hamburguesa ---
         const contenido = document.getElementById('contenido');
         const btnHamburguesa = document.getElementById('btn-hamburguesa');
 
@@ -82,13 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // --- Botón salir del sistema ---
         document.getElementById('btn-salir').addEventListener('click', () => {
             sessionStorage.removeItem('correoUsuario');
             window.location.href = 'login.html';
         });
 
-        // --- Cambio de vistas desde el sidebar ---
         const enlacesVista = document.querySelectorAll('.enlace-vista');
         const vistas = document.querySelectorAll('.vista');
 
@@ -109,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        /* ---------------- Usuarios > Captura ---------------- */
         const formularioCaptura = document.getElementById('formulario-captura');
         const usuariosCapturados = [];
 
@@ -173,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        /* ---------------- Alumnos ---------------- */
         const formularioAlumno = document.getElementById('formulario-alumno');
         const modalEdad = new bootstrap.Modal(document.getElementById('modal-edad'));
 
@@ -229,8 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modal-alumno-control').textContent = control;
             document.getElementById('modal-alumno-edad').textContent = `${edad} años`;
             document.getElementById('modal-alumno-mayor').textContent = mayorEdad
-                ? 'Es mayor de edad ✅'
-                : 'Es menor de edad ⚠️';
+                ? 'Es mayor de edad '
+                : 'Es menor de edad ';
 
             modalEdad.show();
         });
