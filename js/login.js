@@ -14,7 +14,6 @@ function guardarUsuarios(usuarios) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
     const formularioLogin = document.getElementById('formulario-login');
 
     if (formularioLogin) {
