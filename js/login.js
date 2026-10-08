@@ -1,8 +1,21 @@
+
+const CLAVE_USUARIOS = 'usuariosRegistrados';
+
+function obtenerUsuarios() {
+    try {
+        const guardados = JSON.parse(localStorage.getItem(CLAVE_USUARIOS));
+        return Array.isArray(guardados) ? guardados : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function guardarUsuarios(usuarios) {
+    localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(usuarios));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ===================================================
-       LOGIN.HTML
-    =================================================== */
     const formularioLogin = document.getElementById('formulario-login');
 
     if (formularioLogin) {
@@ -53,14 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ===================================================
-       INDEX.HTML
-    =================================================== */
     const sidebar = document.getElementById('sidebar');
 
     if (sidebar) {
 
-        // Si no hay sesión activa, regresa al login
         const correoUsuario = sessionStorage.getItem('correoUsuario');
         if (!correoUsuario) {
             window.location.href = 'login.html';
@@ -69,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('nombre-usuario-navbar').textContent = correoUsuario;
 
-        // --- Botón hamburguesa ---
         const contenido = document.getElementById('contenido');
         const btnHamburguesa = document.getElementById('btn-hamburguesa');
 
@@ -82,13 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // --- Botón salir del sistema ---
         document.getElementById('btn-salir').addEventListener('click', () => {
             sessionStorage.removeItem('correoUsuario');
             window.location.href = 'login.html';
         });
 
-        // --- Cambio de vistas desde el sidebar ---
         const enlacesVista = document.querySelectorAll('.enlace-vista');
         const vistas = document.querySelectorAll('.vista');
 
@@ -109,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        /* ---------------- Usuarios > Captura ---------------- */
         const formularioCaptura = document.getElementById('formulario-captura');
         const usuariosCapturados = [];
 
@@ -173,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        /* ---------------- Alumnos ---------------- */
         const formularioAlumno = document.getElementById('formulario-alumno');
         const modalEdad = new bootstrap.Modal(document.getElementById('modal-edad'));
 
