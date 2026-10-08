@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         formularioLogin.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            errorCorreo.textContent = '';
-            errorPassword.textContent = '';
-            mensajeExito.textContent = '';
+            if (errorCorreo) errorCorreo.textContent = '';
+            if (errorPassword) errorPassword.textContent = '';
+            if (mensajeExito) mensajeExito.textContent = '';
 
             const correo = inputCorreo.value.trim();
             const password = inputPassword.value;
@@ -47,18 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
             let formularioValido = true;
 
             if (!correoValido) {
-                errorCorreo.textContent = 'Ingresa un correo electrónico válido.';
+                if (errorCorreo) errorCorreo.textContent = 'Ingresa un correo electrónico válido.';
                 formularioValido = false;
             }
 
             if (!passwordValido) {
-                errorPassword.textContent = 'Debe tener 8+ caracteres, mayúscula, minúscula, número y símbolo.';
+                if (errorPassword) errorPassword.textContent = 'Debe tener 8+ caracteres, mayúscula, minúscula, número y símbolo.';
                 formularioValido = false;
             }
 
-            if (!formularioValido) {
-                return;
-            }
+            if (!formularioValido) return;
 
             const usuarios = obtenerUsuarios();
 
@@ -68,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
 
                 if (!usuarioEncontrado) {
-                    errorPassword.textContent = 'Correo o contraseña incorrectos. Solo pueden entrar usuarios registrados.';
+                    if (errorPassword) errorPassword.textContent = 'Correo o contraseña incorrectos. Solo pueden entrar usuarios registrados.';
                     return;
                 }
             }
 
             sessionStorage.setItem('correoUsuario', correo);
-            mensajeExito.textContent = 'Acceso correcto. Entrando al sistema...';
+            if (mensajeExito) mensajeExito.textContent = 'Acceso correcto. Entrando al sistema...';
 
             setTimeout(() => {
                 window.location.href = 'index.html';
